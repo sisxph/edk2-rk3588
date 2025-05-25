@@ -41,9 +41,11 @@ jobs:
           - r58-mini
           - r58x
           - roc-rk3588s-pc
+          - radxa-cm5
           - rock-5-itx
           - rock-5a
           - rock-5b
+          - rock-5c
           - rock-5bplus
           - station-m3
         CONFIGURATION: ${{ fromJSON(format('[{0}]', inputs.build-configs || '"Debug"')) }}
