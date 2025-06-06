@@ -318,11 +318,11 @@
   #
   # Network support flags and default values
   #
-  gRockchipTokenSpaceGuid.PcdNetworkStackEnabledDefault|TRUE
-  gRockchipTokenSpaceGuid.PcdNetworkStackIpv4EnabledDefault|TRUE
-  gRockchipTokenSpaceGuid.PcdNetworkStackIpv6EnabledDefault|TRUE
-  gRockchipTokenSpaceGuid.PcdNetworkStackPxeBootEnabledDefault|TRUE
-  gRockchipTokenSpaceGuid.PcdNetworkStackHttpBootEnabledDefault|TRUE
+  gRockchipTokenSpaceGuid.PcdNetworkStackEnabledDefault|FALSE
+  gRockchipTokenSpaceGuid.PcdNetworkStackIpv4EnabledDefault|FALSE
+  gRockchipTokenSpaceGuid.PcdNetworkStackIpv6EnabledDefault|FALSE
+  gRockchipTokenSpaceGuid.PcdNetworkStackPxeBootEnabledDefault|FALSE
+  gRockchipTokenSpaceGuid.PcdNetworkStackHttpBootEnabledDefault|FALSE
 
 [PcdsPatchableInModule]
   gEfiMdePkgTokenSpaceGuid.PcdUartDefaultBaudRate|1500000
