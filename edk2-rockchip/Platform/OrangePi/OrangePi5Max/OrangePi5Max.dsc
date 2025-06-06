@@ -98,6 +98,13 @@
   gRK3588TokenSpaceGuid.PcdI2S0Supported|TRUE
 
   #
+  # Display support flags and default values
+  #
+  gRK3588TokenSpaceGuid.PcdDisplayConnectors|{CODE({
+    VOP_OUTPUT_IF_HDMI0
+  })}
+
+  #
   # On-Board fan output
   #
   gRK3588TokenSpaceGuid.PcdHasOnBoardFanOutput|TRUE
