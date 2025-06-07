@@ -50,7 +50,7 @@
   gRK3588TokenSpaceGuid.PcdAcpiPcieEcamCompatModeDefault|0|UINT32|0x00010301
   gRK3588TokenSpaceGuid.PcdFdtCompatModeDefault|0|UINT32|0x00010351
   gRK3588TokenSpaceGuid.PcdFdtForceGopDefault|0|UINT8|0x00010352
-  gRK3588TokenSpaceGuid.PcdFdtSupportOverridesDefault|0|UINT8|0x00010353
+  gRK3588TokenSpaceGuid.PcdFdtSupportOverridesDefault|1|UINT8|0x00010353
   gRK3588TokenSpaceGuid.PcdFdtOverrideFixupDefault|0|UINT8|0x00010354
   gRK3588TokenSpaceGuid.PcdFdtOverrideBasePathDefault|L""|VOID*|0x00010355
   gRK3588TokenSpaceGuid.PcdFdtOverrideOverlayPathDefault|L""|VOID*|0x00010356
@@ -122,7 +122,7 @@
   gRK3588TokenSpaceGuid.PcdAcpiPcieEcamCompatMode|0|UINT32|0x00000301
   gRK3588TokenSpaceGuid.PcdFdtCompatMode|0|UINT32|0x00000351
   gRK3588TokenSpaceGuid.PcdFdtForceGop|0|UINT8|0x00000352
-  gRK3588TokenSpaceGuid.PcdFdtSupportOverrides|0|UINT8|0x00000353
+  gRK3588TokenSpaceGuid.PcdFdtSupportOverrides|1|UINT8|0x00000353
   gRK3588TokenSpaceGuid.PcdFdtOverrideFixup|0|UINT8|0x00000354
   gRK3588TokenSpaceGuid.PcdFdtOverrideBasePath|{ 0x0 }|FDT_OVERRIDE_PATH_VARSTORE_DATA|0x00000355 {
     <Packages>
