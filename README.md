@@ -207,7 +207,7 @@ In addition to the default paths above, it is possible to specify custom ones vi
 | `rk3588-rock-5-itx`                     | ROCK 5 ITX                    |
 | `rk3588s-orangepi-5`                    | Orange Pi 5                   |
 | `rk3588-orangepi-5-plus`                | Orange Pi 5 Plus              |
-| `rk3588-orangepi-5-ultra`                | Orange Pi 5 Ultra              |
+| `rk3588-orangepi-5-ultra`               | Orange Pi 5 Ultra             |
 | `rk3588s-9tripod-linux`                 | Indiedroid Nova               |
 | `rk3588s-fydetab-duo`                   | Fydetab Duo                   |
 | `rk3588-buzztv-p6`                      | PowerStation 6                |
