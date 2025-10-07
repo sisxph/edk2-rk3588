@@ -61,7 +61,7 @@
   gRockchipTokenSpaceGuid.PcdPlatformName|"Orange Pi 5 Ultra"
   gRockchipTokenSpaceGuid.PcdPlatformVendorName|"Orange Pi"
   gRockchipTokenSpaceGuid.PcdFamilyName|"Orange Pi 5"
-  gRockchipTokenSpaceGuid.PcdProductUrl|"http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5-ultra.html"
+  gRockchipTokenSpaceGuid.PcdProductUrl|"http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5-Ultra.html"
   gRockchipTokenSpaceGuid.PcdDeviceTreeName|"rk3588-orangepi-5-ultra"
 
   # I2C
@@ -126,3 +126,4 @@
 
   # Splash screen logo
   $(VENDOR_DIRECTORY)/Drivers/LogoDxe/LogoDxe.inf
+
