@@ -181,6 +181,8 @@ I2cIomux (
       GpioPinSetFunction (0, GPIO_PIN_PD5, 9); // i2c1_sda_m2
       break;
     case 2:
+      GpioPinSetFunction (0, GPIO_PIN_PB7, 9); // i2c2_scl_m2
+      GpioPinSetFunction (0, GPIO_PIN_PC0, 9); // i2c2_sda_m2
       break;
     case 3:
       GpioPinSetFunction (1, GPIO_PIN_PC1, 9); // i2c3_scl_m0
@@ -212,12 +214,12 @@ UsbPortPowerEnable (
   DEBUG ((DEBUG_INFO, "UsbPortPowerEnable called\n"));
 
   /* vcc5v0_host_en */
-  GpioPinWrite (3, GPIO_PIN_PB7, TRUE);
-  GpioPinSetDirection (3, GPIO_PIN_PB7, GPIO_PIN_OUTPUT);
+  GpioPinWrite (3, GPIO_PIN_PD5, TRUE);
+  GpioPinSetDirection (3, GPIO_PIN_PD5, GPIO_PIN_OUTPUT);
 
-  /* typec5v_pwren */
-  GpioPinWrite (4, GPIO_PIN_PB0, TRUE);
-  GpioPinSetDirection (4, GPIO_PIN_PB0, GPIO_PIN_OUTPUT);
+  /* vcc5v0_OTG_en */
+  GpioPinWrite (4, GPIO_PIN_PB1, TRUE);
+  GpioPinSetDirection (4, GPIO_PIN_PB1, GPIO_PIN_OUTPUT);
 }
 
 VOID
@@ -248,29 +250,24 @@ PcieIoInit (
       /* vcc3v3_pcie30 */
       GpioPinSetDirection (2, GPIO_PIN_PB6, GPIO_PIN_OUTPUT);
       break;
-    case PCIE_SEGMENT_PCIE20L0: // M.2 A+E Key
+    case PCIE_SEGMENT_PCIE20L0: // PCIE expantion
       /* reset */
       GpioPinSetDirection (4, GPIO_PIN_PA5, GPIO_PIN_OUTPUT);
-      /* vcc3v3_pcie2x1l0 */
-      GpioPinSetDirection (2, GPIO_PIN_PC5, GPIO_PIN_OUTPUT);
       break;
-    case PCIE_SEGMENT_PCIE20L1: // RTL8125B
-      /* reset */
-      GpioPinSetDirection (3, GPIO_PIN_PB3, GPIO_PIN_OUTPUT);
-      break;
-    case PCIE_SEGMENT_PCIE20L2: // RTL8125B
+    case PCIE_SEGMENT_PCIE20L1: // PCIE expantion
       /* reset */
       GpioPinSetDirection (4, GPIO_PIN_PA2, GPIO_PIN_OUTPUT);
+      break;
+    case PCIE_SEGMENT_PCIE20L2: // RTL8125BG
+      /* reset */
+      GpioPinSetDirection (3, GPIO_PIN_PD4, GPIO_PIN_OUTPUT);
+      /* vcc3v3_pcie_eth */
+      GpioPinSetDirection (0, GPIO_PIN_PD3, GPIO_PIN_OUTPUT);
       break;
     default:
       break;
   }
 
-  if ((Segment == PCIE_SEGMENT_PCIE20L1) || (Segment == PCIE_SEGMENT_PCIE20L2)) {
-    /* vcc3v3_pcie_eth */
-    GpioPinSetDirection (3, GPIO_PIN_PB4, GPIO_PIN_OUTPUT);
-  }
-}
 
 VOID
 EFIAPI
@@ -284,11 +281,10 @@ PciePowerEn (
       GpioPinWrite (2, GPIO_PIN_PB6, Enable);
       break;
     case PCIE_SEGMENT_PCIE20L0:
-      GpioPinWrite (2, GPIO_PIN_PC5, Enable);
       break;
     case PCIE_SEGMENT_PCIE20L1:
+      break;
     case PCIE_SEGMENT_PCIE20L2:
-      /* Yes, disabling one would disable the other as well. */
       GpioPinWrite (3, GPIO_PIN_PB4, !Enable);
       break;
     default:
@@ -311,10 +307,10 @@ PciePeReset (
       GpioPinWrite (4, GPIO_PIN_PA5, !Enable);
       break;
     case PCIE_SEGMENT_PCIE20L1:
-      GpioPinWrite (3, GPIO_PIN_PB3, !Enable);
+      GpioPinWrite (4, GPIO_PIN_PA2, !Enable);
       break;
     case PCIE_SEGMENT_PCIE20L2:
-      GpioPinWrite (4, GPIO_PIN_PA2, !Enable);
+      GpioPinWrite (3, GPIO_PIN_PD4, !Enable);
       break;
     default:
       break;
@@ -326,8 +322,8 @@ EFIAPI
 HdmiTxIomux (
   IN UINT32  Id
   )
-{
-  switch (Id) {
+{ /* Remove this function for hdmi_tx0 is not connected ?? */
+  switch (1) {
     case 0:
       GpioPinSetFunction (4, GPIO_PIN_PC1, 5); // hdmim0_tx0_cec
       GpioPinSetPull (4, GPIO_PIN_PC1, GPIO_PIN_PULL_NONE);
@@ -339,8 +335,8 @@ HdmiTxIomux (
       GpioPinSetPull (4, GPIO_PIN_PC0, GPIO_PIN_PULL_NONE);
       break;
     case 1:
-      GpioPinSetFunction (3, GPIO_PIN_PC4, 5); // hdmim2_tx1_cec
-      GpioPinSetPull (3, GPIO_PIN_PC4, GPIO_PIN_PULL_NONE);
+      GpioPinSetFunction (2, GPIO_PIN_PC4, 5); // hdmim2_tx1_cec
+      GpioPinSetPull (2, GPIO_PIN_PC4, GPIO_PIN_PULL_NONE);
       GpioPinSetFunction (1, GPIO_PIN_PA6, 5); // hdmim0_tx1_hpd
       GpioPinSetPull (1, GPIO_PIN_PA6, GPIO_PIN_PULL_NONE);
       GpioPinSetFunction (3, GPIO_PIN_PC6, 5); // hdmim1_tx1_scl
@@ -353,11 +349,11 @@ HdmiTxIomux (
 
 PWM_DATA  pwm_data = {
   .ControllerID = PWM_CONTROLLER0,
-  .ChannelID    = PWM_CHANNEL3,
+  .ChannelID    = PWM_CHANNEL9,
   .PeriodNs     = 4000000,
   .DutyNs       = 4000000,
   .Polarity     = FALSE,
-}; // PWM0_CH3
+}; // PWM0_CH9
 
 VOID
 EFIAPI
@@ -365,7 +361,7 @@ PwmFanIoSetup (
   VOID
   )
 {
-  GpioPinSetFunction (3, GPIO_PIN_PB2, 0xB); // PWM3_IR_M1
+  GpioPinSetFunction (3, GPIO_PIN_PD1, 0xB); // PWM9_M2
   RkPwmSetConfig (&pwm_data);
   RkPwmEnable (&pwm_data);
 }
@@ -387,8 +383,8 @@ PlatformInitLeds (
   )
 {
   /* Status indicator */
-  GpioPinWrite (3, GPIO_PIN_PA6, FALSE);
-  GpioPinSetDirection (3, GPIO_PIN_PA6, GPIO_PIN_OUTPUT);
+  GpioPinWrite (0, GPIO_PIN_PC5, FALSE);
+  GpioPinSetDirection (0, GPIO_PIN_PC5, GPIO_PIN_OUTPUT);
 }
 
 VOID
@@ -397,7 +393,7 @@ PlatformSetStatusLed (
   IN BOOLEAN  Enable
   )
 {
-  GpioPinWrite (3, GPIO_PIN_PA6, Enable);
+  GpioPinWrite (0, GPIO_PIN_PC5, Enable);
 }
 
 VOID
@@ -407,8 +403,8 @@ PlatformWiFiEnable (
   )
 {
   // WiFi - enable
-  GpioPinWrite (0, GPIO_PIN_PC4, Enable);
-  GpioPinSetDirection (0, GPIO_PIN_PC4, GPIO_PIN_OUTPUT);
+  GpioPinWrite (2, GPIO_PIN_PC5, Enable);
+  GpioPinSetDirection (2, GPIO_PIN_PC5, GPIO_PIN_OUTPUT);
 }
 
 CONST EFI_GUID *
@@ -445,5 +441,5 @@ PlatformEarlyInit (
   // Configure various things specific to this platform
   PlatformWiFiEnable (TRUE);
 
-  GpioPinSetFunction (1, GPIO_PIN_PD3, 0); // jdet
+  GpioPinSetFunction (3, GPIO_PIN_PD2, 0); // jdet
 }
