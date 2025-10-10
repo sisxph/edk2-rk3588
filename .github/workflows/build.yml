@@ -38,6 +38,7 @@ jobs:
           - orangepi-5
           - orangepi-5-max
           - orangepi-5plus
+          - orangepi-5ultra
           - powerstation-6
           - r58-mini
           - r58x
