@@ -107,7 +107,7 @@
   gRockchipTokenSpaceGuid.PcdSerialPortSendDelay|0|UINT32|0x04000002
 
   gRockchipTokenSpaceGuid.PcdNetworkStackEnabledDefault|FALSE|BOOLEAN|0x05000001
-  gRockchipTokenSpaceGuid.PcdNetworkStackIpv4EnabledDefault|FALSE|BOOLEAN|0x05000002
-  gRockchipTokenSpaceGuid.PcdNetworkStackIpv6EnabledDefault|FALSE|BOOLEAN|0x05000003
-  gRockchipTokenSpaceGuid.PcdNetworkStackPxeBootEnabledDefault|FALSE|BOOLEAN|0x05000004
-  gRockchipTokenSpaceGuid.PcdNetworkStackHttpBootEnabledDefault|FALSE|BOOLEAN|0x05000005
+  gRockchipTokenSpaceGuid.PcdNetworkStackIpv4EnabledDefault|TRUE|BOOLEAN|0x05000002
+  gRockchipTokenSpaceGuid.PcdNetworkStackIpv6EnabledDefault|TRUE|BOOLEAN|0x05000003
+  gRockchipTokenSpaceGuid.PcdNetworkStackPxeBootEnabledDefault|TRUE|BOOLEAN|0x05000004
+  gRockchipTokenSpaceGuid.PcdNetworkStackHttpBootEnabledDefault|TRUE|BOOLEAN|0x05000005
