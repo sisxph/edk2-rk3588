@@ -40,7 +40,6 @@ static struct regulator_init_data  rk806_init_data[] = {
   RK8XX_VOLTAGE_INIT (MASTER_PLDO4,  3300000),
   RK8XX_VOLTAGE_INIT (MASTER_PLDO5,  3300000),
   RK8XX_VOLTAGE_INIT (MASTER_PLDO6,  1800000),
-
   /* No dual PMICs on this platform */
 };
 
