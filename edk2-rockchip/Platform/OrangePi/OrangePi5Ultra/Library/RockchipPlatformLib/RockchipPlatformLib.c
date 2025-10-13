@@ -21,16 +21,17 @@ static struct regulator_init_data  rk806_init_data[] = {
   /* Master PMIC */
   RK8XX_VOLTAGE_INIT (MASTER_BUCK1,  750000),
   RK8XX_VOLTAGE_INIT (MASTER_BUCK3,  750000),
-  RK8XX_VOLTAGE_INIT (MASTER_BUCK4,  750000),
+  RK8XX_VOLTAGE_INIT (MASTER_BUCK4,  775000),
   RK8XX_VOLTAGE_INIT (MASTER_BUCK5,  850000),
-  // RK8XX_VOLTAGE_INIT(MASTER_BUCK6, 750000),
+  // RK8XX_VOLTAGE_INIT(MASTER_BUCK6,1100000),
   RK8XX_VOLTAGE_INIT (MASTER_BUCK7,  2000000),
   RK8XX_VOLTAGE_INIT (MASTER_BUCK8,  3300000),
   RK8XX_VOLTAGE_INIT (MASTER_BUCK10, 1800000),
 
   RK8XX_VOLTAGE_INIT (MASTER_NLDO1,  750000),
   RK8XX_VOLTAGE_INIT (MASTER_NLDO2,  850000),
-  RK8XX_VOLTAGE_INIT (MASTER_NLDO3,  750000),
+  /* The OPi is officially configured for the 837500 voltage, but is still marked as avdd_0v75_s0 in the schematic and Linux device tree. rockchip says this voltage is set to improve HDMI stability. */
+  RK8XX_VOLTAGE_INIT (MASTER_NLDO3,  837500),
   RK8XX_VOLTAGE_INIT (MASTER_NLDO4,  850000),
   RK8XX_VOLTAGE_INIT (MASTER_NLDO5,  750000),
 
@@ -121,27 +122,7 @@ NorFspiIomux (
   )
 {
   /* io mux */
-  MmioWrite32 (
-    NS_CRU_BASE + CRU_CLKSEL_CON78,
-    (((0x3 << 12) | (0x3f << 6)) << 16) | (0x0 << 12) | (0x3f << 6)
-    );
-  #define FSPI_M1
- #if defined (FSPI_M0)
-  /*FSPI M0*/
-  BUS_IOC->GPIO2A_IOMUX_SEL_L = ((0xF << 0) << 16) | (2 << 0);   // FSPI_CLK_M0
-  BUS_IOC->GPIO2D_IOMUX_SEL_L = (0xFFFFUL << 16) | (0x2222);     // FSPI_D0_M0,FSPI_D1_M0,FSPI_D2_M0,FSPI_D3_M0
-  BUS_IOC->GPIO2D_IOMUX_SEL_H = ((0xF << 8) << 16) | (0x2 << 8); // FSPI_CS0N_M0
- #elif defined (FSPI_M1)
-  /*FSPI M1*/
-  BUS_IOC->GPIO2A_IOMUX_SEL_H = (0xFF00UL << 16) | (0x3300); // FSPI_D0_M1,FSPI_D1_M1
-  BUS_IOC->GPIO2B_IOMUX_SEL_L = (0xF0FFUL << 16) | (0x3033); // FSPI_D2_M1,FSPI_D3_M1,FSPI_CLK_M1
-  BUS_IOC->GPIO2B_IOMUX_SEL_H = (0xF << 16) | (0x3);         // FSPI_CS0N_M1
- #else
-  /*FSPI M2*/
-  BUS_IOC->GPIO3A_IOMUX_SEL_L = (0xFFFFUL << 16) | (0x5555); // [FSPI_D0_M2-FSPI_D3_M2]
-  BUS_IOC->GPIO3A_IOMUX_SEL_H = (0xF0UL << 16) | (0x50);     // FSPI_CLK_M2
-  BUS_IOC->GPIO3C_IOMUX_SEL_H = (0xF << 16) | (0x2);         // FSPI_CS0_M2
- #endif
+  /* Do not override, set by earlier boot stages. */
 }
 
 VOID
@@ -266,7 +247,7 @@ PcieIoInit (
     default:
       break;
   }
-
+}
 
 VOID
 EFIAPI
