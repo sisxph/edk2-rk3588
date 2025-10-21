@@ -15,7 +15,7 @@
 [Defines]
   PLATFORM_NAME                  = OrangePi5Ultra
   PLATFORM_VENDOR                = OrangePi
-  PLATFORM_GUID                  = 6bb03dd4-c246-474a-851c-70ea24a89e43
+  PLATFORM_GUID                  = 77c5f947-7fc2-4ab6-ab54-088f384b06f0
   PLATFORM_VERSION               = 0.2
   DSC_SPECIFICATION              = 0x00010019
   OUTPUT_DIRECTORY               = Build/$(PLATFORM_NAME)
@@ -78,7 +78,7 @@
   # PCIe/SATA/USB Combo PIPE PHY support flags and default values
   #
   gRK3588TokenSpaceGuid.PcdComboPhy0Switchable|FALSE
-  gRK3588TokenSpaceGuid.PcdComboPhy1Switchable|TRUE
+  gRK3588TokenSpaceGuid.PcdComboPhy1Switchable|FALSE
   gRK3588TokenSpaceGuid.PcdComboPhy2Switchable|FALSE
   gRK3588TokenSpaceGuid.PcdComboPhy0ModeDefault|$(COMBO_PHY_MODE_PCIE)
   gRK3588TokenSpaceGuid.PcdComboPhy1ModeDefault|$(COMBO_PHY_MODE_PCIE)
