@@ -17,9 +17,9 @@
 
 #define BOARD_AUDIO_CODEC_HID "ESSX8388"
 #define BOARD_CODEC_I2C "\\_SB.I2C7"
-#define BOARD_CODEC_I2C_ADDR 0x11
-#define BOARD_CODEC_GPIO "\\_SB.GPI1"
-#define BOARD_CODEC_GPIO_PIN GPIO_PIN_PD3
+#define BOARD_CODEC_I2C_ADDR 0x11 //???
+#define BOARD_CODEC_GPIO "\\_SB.GPI3"
+#define BOARD_CODEC_GPIO_PIN GPIO_PIN_PD2
 
 DefinitionBlock ("Dsdt.aml", "DSDT", 2, "RKCP  ", "RK3588  ", 2)
 {
