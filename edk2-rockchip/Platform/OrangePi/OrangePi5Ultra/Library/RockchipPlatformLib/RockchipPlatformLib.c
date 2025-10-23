@@ -319,11 +319,11 @@ HdmiTxIomux (
 
 PWM_DATA  pwm_data = {
   .ControllerID = PWM_CONTROLLER0,
-  .ChannelID    = PWM_CHANNEL9,
+  .ChannelID    = PWM_CHANNEL3,
   .PeriodNs     = 4000000,
   .DutyNs       = 4000000,
   .Polarity     = FALSE,
-}; // PWM0_CH9
+}; // PWM0_CH3
 
 VOID
 EFIAPI
